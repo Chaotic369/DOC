@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-  // Zero-Latency Local Cache Boot
-  (function() {
-    if (localStorage.getItem('sovereign_theme') === 'light') {
-        document.documentElement.classList.add('light-theme');
-    } else {
-        document.documentElement.classList.remove('light-theme');
-    }
-    
-    const cachedWp = localStorage.getItem('sovereign_wp_url');
-    if (cachedWp) {
-        document.documentElement.classList.add('has-wallpaper');
-        const style = document.createElement('style');
-        style.innerHTML = `#bgOverlay { background-image: url("${cachedWp}") !important; }`;
-        document.head.appendChild(style);
-    }
-  })();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Sovereign System - Files & Notes</title>
@@ -48,27 +30,9 @@
   --note-green: rgba(57, 211, 83, 0.22);
   --note-red: rgba(248, 81, 73, 0.22);
   --note-purple: rgba(188, 140, 255, 0.22);
-}
-html.light-theme {
-  /* Claude Light Theme */
-  --bg-base: #ffffff;
-  --bg-surface: #ffffff;
-  --bg-solid-surface: #ffffff;
-  --bg-box: #ffffff;
-  --text-main: #191813;
-  --text-muted: #5c5a55;
-  --accent: #e5e0da;
+  }
 
-  /* Light Mode Note Phases (Brighter pastel for perfect text contrast) */
-  --note-base: rgba(0, 0, 0, 0.04);
-  --note-amber: rgba(227, 179, 65, 0.2);
-  --note-blue: rgba(92, 157, 255, 0.2);
-  --note-green: rgba(57, 211, 83, 0.2);
-  --note-red: rgba(248, 81, 73, 0.2);
-  --note-purple: rgba(188, 140, 255, 0.2);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; outline: none !important; border: none; }
+  * { margin: 0; padding: 0; box-sizing: border-box; outline: none !important; border: none; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg-base); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--text-main); }
 
 /* Massive slider size for flawless tablet touch */
@@ -115,27 +79,21 @@ html.has-wallpaper #storage-toolbar .action-mini-btn {
 .action-mini-btn {
   width: 36px; height: 36px; border-radius: 50%; background: var(--bg-surface); color: var(--text-main);
   display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s, color 0.2s; border: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: none !important;
 }
-.action-mini-btn:active { transform: scale(0.9); }
 
 /* FLOATING SQUIRCLE UPLOAD BUTTON (BOTTOM RIGHT) */
 #uploadSquircleBtn {
   position: fixed; bottom: 44px; right: 20px; z-index: 10000; width: 56px; height: 56px; border-radius: 50%;
   background: var(--bg-surface); color: var(--text-main); border: none !important;
   display: flex; align-items: center; justify-content: center; font-size: 22px;
-  cursor: pointer; transition: transform 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
-#uploadSquircleBtn:hover { transform: translateY(-3px); }
-#uploadSquircleBtn:active { transform: scale(0.92); }
 
 button.btn {
   background: var(--bg-base); border: none !important; color: var(--text-main); border-radius: 24px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; transition: filter 0.2s, transform 0.1s;
+  display: flex; align-items: center; justify-content: center;
 }
-button.btn:hover { filter: brightness(0.9); }
-html:not(.light-theme) button.btn:hover { filter: brightness(1.2); }
-button.btn:active { transform: scale(0.96); }
 
 /* FILE LIST ENGINE */
 #filesGridContainer {
@@ -145,7 +103,6 @@ button.btn:active { transform: scale(0.96); }
 .file-card {
   background: var(--bg-surface); border: none !important;
   border-radius: 24px; padding: 12px 16px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px;
-  transition: transform 0.15s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   contain: layout style paint;
   -webkit-touch-callout: none;
@@ -153,7 +110,6 @@ button.btn:active { transform: scale(0.96); }
   -webkit-user-select: none;
   touch-action: pan-y;
 }
-.file-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
 
 /* MASONRY GRID SYSTEM */
 #notes-container {
@@ -169,7 +125,7 @@ button.btn:active { transform: scale(0.96); }
 .note-card {
   width: 100%; min-width: 0; border: none !important;
   display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 24px;
-  cursor: grab; transition: transform 0.2s, box-shadow 0.2s;
+  cursor: grab;
   color: var(--text-main); font-size: 13px; line-height: 1.5; position: relative;
   contain: layout style paint;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -178,7 +134,6 @@ button.btn:active { transform: scale(0.96); }
   -webkit-user-select: none;
   touch-action: pan-y;
 }
-.note-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
 .note-card:active { cursor: grabbing; }
 
 /* PC Grid Logic (6 Columns) */
@@ -213,29 +168,25 @@ button.btn:active { transform: scale(0.96); }
 .note-gallery.count-3 { grid-template-columns: 1fr 1fr; }
 .note-gallery.count-many { grid-template-columns: 1fr 1fr; }
 .note-gallery-item { position: relative; overflow: hidden; cursor: pointer; background: var(--bg-base); }
-.note-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s; }
-.note-gallery-item:hover img { transform: scale(1.05); }
+.note-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .folder-card {
   background: var(--bg-surface); padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 8px;
-  cursor: pointer; transition: transform 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   font-weight: 600; font-size: 13px; border: none !important;
   contain: layout style paint; max-width: 160px; flex-shrink: 0; white-space: nowrap;
 }
-.folder-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
 
 .category-card {
   background: var(--bg-surface); padding: 16px 8px; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: none !important;
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: none !important;
   width: 106px; text-align: center; flex-shrink: 0;
 }
-.category-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
 .category-icon-wrapper {
   width: 52px; height: 52px; border-radius: 20px; background: var(--bg-base); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 2px;
 }
 
-.quick-input-bar { position: fixed; bottom: 44px; right: 88px; z-index: 10000; width: calc(100vw - 110px); max-width: 280px; height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: rgba(22, 22, 22, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: none !important; outline: none !important; transition: transform 0.2s, box-shadow 0.2s; }
-.quick-input-bar:focus-within { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.quick-input-bar { position: fixed; bottom: 44px; right: 88px; z-index: 10000; width: calc(100vw - 110px); max-width: 280px; height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 20px; background: rgba(22, 22, 22, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: none !important; outline: none !important; }
 #quick-note-input { color: #ffffff !important; }
 #quick-note-input::placeholder { color: rgba(255, 255, 255, 0.7) !important; opacity: 1; }
 html.light-theme .quick-input-bar { background: rgba(255, 255, 255, 0.85); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
@@ -259,10 +210,8 @@ html:not(.light-theme) .file-row-input:focus { filter: brightness(1.2); }
   z-index: 50000; display: none; max-width: 90vw; text-align: center; white-space: pre-line;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
-#toast.show { display: block; animation: slideUp 150ms ease-out forwards; }
+#toast.show { display: block; }
 #toast.warn { color: var(--amber); } #toast.err { color: var(--red); } #toast.info { color: var(--blue); }
-
-@keyframes slideUp{from{opacity:0;transform:translate(-50%, 10px) translateZ(0)}to{opacity:1;transform:translate(-50%, 0) translateZ(0)}}
 
 .modal-base {
   position: fixed; z-index: 40000; background: rgba(22, 22, 22, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 32px;
@@ -332,111 +281,15 @@ html.light-theme .file-checkbox {
   border: none !important; margin: 16px; border-radius: 40px; pointer-events: none;
 }
 
-/* Glassmorphism Wallpaper UI */
-html.has-wallpaper {
-  --bg-base: transparent;
-  --bg-surface: transparent;
-}
-html.has-wallpaper #bgOverlay {
-  filter: none;
-}
-html.has-wallpaper.light-theme {
-  --bg-base: transparent;
-  --bg-surface: transparent;
-}
-html.has-wallpaper.light-theme #bgOverlay {
-  display: block;
-  filter: none;
-}
-html.has-wallpaper.light-theme body, 
-html.has-wallpaper.light-theme #mainWorkspace { 
-  background: transparent !important; 
-}
-html.has-wallpaper body, html.has-wallpaper #mainWorkspace { 
-  background: transparent !important; 
-}
-/* Scrollable Cards: Lighter blur + CSS Containment to stop off-screen rendering lag */
-html.has-wallpaper .note-card,
-html.has-wallpaper .file-card,
-html.has-wallpaper .folder-card,
-html.has-wallpaper .category-card {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 80px;
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
-html.is-scrolling.has-wallpaper .note-card,
-html.is-scrolling.has-wallpaper .file-card,
-html.is-scrolling.has-wallpaper .folder-card,
-html.is-scrolling.has-wallpaper .category-card {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* Fixed UI: High quality blur, hardware accelerated */
-html.has-wallpaper .modal-base,
-html.has-wallpaper #multiSelectBar,
-html.has-wallpaper #statusBar,
-html.has-wallpaper .top-bar-actions,
-html.has-wallpaper .action-mini-btn,
-html.has-wallpaper button.btn,
-html.has-wallpaper .file-row-input,
-html.has-wallpaper #mediaControlsBar,
-html.has-wallpaper #fullNoteModal > div,
-html.has-wallpaper #toast {
-  transform: translateZ(0);
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background: transparent !important;
-}
-html.has-wallpaper #storage-toolbar {
-  transform: translateZ(0);
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-html.has-wallpaper .quick-input-bar {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  transform: translateZ(0);
-  box-shadow: none !important;
-  background: transparent !important;
-}
-
-/* Fixed UI: High quality blur, hardware accelerated */
-
-html.has-wallpaper #uploadSquircleBtn {
-  transform: translateZ(0);
-  background: transparent !important;
-  color: #f8f7f3 !important;
-  border: none !important;
-}
-html.has-wallpaper.light-theme #uploadSquircleBtn {
-  background: transparent !important;
-  color: #181817 !important;
-}
 </style>
 </head>
 <body>
 
-<div id="bgOverlay" style="position:fixed; inset:0; z-index:-1; background-size:cover; background-position:center center; background-repeat:no-repeat; transform:translateZ(0); contain:strict;"></div>
-<input type="file" id="bgUploadInput" accept="image/*" style="display:none;" multiple onchange="window.setWallpaper(event)">
-
 <div id="progressBar"></div>
 
 <div class="top-bar-actions">
-  <button class="action-mini-btn" onclick="window.openWallpaperModal(event)" title="Wallpapers">
-    <i class="fa-solid fa-image"></i>
-  </button>
   <button class="action-mini-btn" onclick="window.checkStorage()" title="Storage Info">
     <i class="fa-solid fa-hard-drive"></i>
-  </button>
-  <button class="action-mini-btn" onclick="window.toggleTheme()" title="Toggle Theme">
-    <i class="fa-solid fa-circle-half-stroke"></i>
   </button>
 </div>
 
@@ -544,15 +397,6 @@ html.has-wallpaper.light-theme #uploadSquircleBtn {
   <button class="btn" style="padding: 10px; justify-content: flex-start; border-radius: 12px; gap: 12px; margin-top: 8px; background: var(--bg-base);" onclick="document.getElementById('folderContextMenu').classList.remove('open')"><i class="fa-solid fa-xmark"></i> Cancel</button>
 </div>
 
-<div id="wallpaperModal" class="modal-base" style="top: 60px; left: auto; right: 20px; transform: none; margin: 0; width: 280px; padding: 16px;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-    <h4 style="color:var(--text-main); font-size:16px; font-weight:600;">🎨 Backgrounds</h4>
-    <button class="action-mini-btn" style="box-shadow:none; background:transparent; width:28px; height:28px;" onclick="document.getElementById('wallpaperModal').classList.remove('open')"><i class="fa-solid fa-xmark"></i></button>
-  </div>
-  <div id="wallpaper-gallery" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; max-height:50vh; overflow-y:auto; padding-bottom:8px;"></div>
-  <button class="btn" style="padding:12px; background:var(--bg-surface); color:var(--text-main); font-weight:600; border: 1px dashed var(--amber) !important;" onclick="document.getElementById('bgUploadInput').click()">+ Add New Wallpaper</button>
-</div>
-
 <div id="renameModal" class="modal-base">
   <h4 style="color:var(--text-main); margin-bottom:16px; font-size:16px; font-weight:600; padding-bottom:12px;">📁 Rename Cloud Asset</h4>
   <div style="display:flex; flex-direction:column; gap:4px;">
@@ -644,217 +488,6 @@ html.has-wallpaper.light-theme #uploadSquircleBtn {
 <script>
 const SUPABASE_URL = 'https://fxnrugbvbfyamtrfmjea.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_FnWYWD7C9Tvc1YNtVYQ1dA_aPwVsCmE';
-
-window.setWallpaper = async function(e) {
-  const files = Array.from(e.target.files);
-  if(!files.length) return;
-  e.target.value = ''; // reset input
-  
-  const file = files[0];
-  if (file) {
-      window.applyWallpaper(file);
-  }
-};
-
-window.openWallpaperModal = async function(event) {
-    if (event) { event.preventDefault(); event.stopPropagation(); }
-    
-    // Concurrency Lock: Prevents the "duplicate spam" if clicked multiple times
-    window._wpModalRenderId = (window._wpModalRenderId || 0) + 1;
-    const currentRenderId = window._wpModalRenderId;
-    
-    let activeWpName = null;
-    
-    try {
-        const { data: stateData } = await supabaseClient.from('user_data').select('state').eq('id', USER_DOC_ID).single();
-        activeWpName = (stateData && stateData.state && stateData.state.wallpaperName);
-    } catch(e) {}
-
-    if (currentRenderId !== window._wpModalRenderId) return; // Drop stale renders
-
-    const gal = document.getElementById('wallpaper-gallery');
-    gal.innerHTML = '<div style="grid-column: 1/-1; color: var(--text-muted); font-size: 11px; text-align: center;">Loading gallery...</div>';
-    
-    let allWallpapers = [];
-    try {
-        const { data } = await supabaseClient.storage.from(BUCKET_NAME).list('.system', { limit: 100 });
-        if (data) allWallpapers = data.filter(f => f.name.startsWith('wallpaper_'));
-    } catch(e) {}
-    
-    if (currentRenderId !== window._wpModalRenderId) return;
-    gal.innerHTML = '';
-
-    let clearBtn = document.createElement('div');
-    clearBtn.style.cssText = `height:80px; border-radius:16px; background:var(--bg-surface); border:2px dashed var(--text-muted); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-muted); transition:transform 0.2s; ${!activeWpName ? 'border-color:var(--amber); color:var(--amber);' : ''}`;
-    clearBtn.innerHTML = '<i class="fa-solid fa-ban" style="font-size:24px;"></i>';
-    clearBtn.onclick = () => window.applyWallpaper(null);
-    clearBtn.onmouseover = () => clearBtn.style.transform = 'scale(1.05)';
-    clearBtn.onmouseout = () => clearBtn.style.transform = 'scale(1)';
-    gal.appendChild(clearBtn);
-
-    // Render ALL saved wallpapers from storage
-    allWallpapers.forEach(wp => {
-        const fullPath = `.system/${wp.name}`;
-        const { data: urlData } = supabaseClient.storage.from(BUCKET_NAME).getPublicUrl(fullPath);
-        const isActive = (activeWpName === fullPath);
-        
-        let w = document.createElement('div');
-        w.style.cssText = `position:relative; height:80px; border-radius:16px; overflow:hidden; background:var(--bg-base); cursor:pointer; border:none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s; ${isActive ? 'outline: 2px solid var(--amber);' : ''}`;
-        w.onclick = () => window.applyWallpaper(urlData.publicUrl, fullPath);
-        w.innerHTML = `
-           <img src="${urlData.publicUrl}" style="width:100%;height:100%;object-fit:cover;object-position:center;">
-           ${isActive ? `<div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;pointer-events:none;"><i class="fa-solid fa-circle-check" style="color:var(--amber);font-size:24px;background:#000;border-radius:50%;"></i></div>` : ''}
-           <button onclick="window.deleteWallpaperFile(event, '${wp.name}', '${isActive}')" style="position:absolute; top:4px; right:4px; background:rgba(0,0,0,0.6); color:#fff; border:none; border-radius:50%; width:24px; height:24px; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-trash"></i></button>
-        `;
-        gal.appendChild(w);
-    });
-    
-    document.getElementById('wallpaperModal').classList.add('open');
-};
-
-window.deleteWallpaperFile = async function(event, filename, wasActive) {
-    event.stopPropagation();
-    if(!confirm('Permanently delete this wallpaper?')) return;
-    
-    if(wasActive === 'true') window.applyWallpaper(null);
-    
-    try {
-        await supabaseClient.storage.from(BUCKET_NAME).remove([`.system/${filename}`]);
-        window.openWallpaperModal(); // Reload the gallery immediately
-        toast('Wallpaper deleted', 'ok');
-    } catch(e) {
-        toast('Failed to delete file', 'err');
-    }
-};
-
-window.applyWallpaper = async function(source, existingName = null) {
-    const overlay = document.getElementById('bgOverlay');
-    const modal = document.getElementById('wallpaperModal');
-    
-    if (!source) {
-        overlay.style.backgroundImage = 'none';
-        document.documentElement.classList.remove('has-wallpaper');
-        localStorage.removeItem('sovereign_wp_url');
-        modal.classList.remove('open'); // Close Modal Instantly
-
-        try {
-            const { data, error } = await supabaseClient.from('user_data').select('state').eq('id', USER_DOC_ID).single();
-            if (error && error.code !== 'PGRST116') throw error;
-            const latestState = (data && data.state) || {};
-            await supabaseClient.from('user_data').upsert({ id: USER_DOC_ID, state: { ...latestState, wallpaperName: null } });
-        } catch(e) { console.error("Wallpaper sync error:", e); }
-        return;
-    }
-    
-    // If it's a File object (brand new upload directly from OS file picker)
-    if (source instanceof File) {
-        modal.classList.remove('open'); // Close immediately so user isn't stuck
-        toast(`Starting Upload... 0%`, 'info', 10000);
-        showProgress(5);
-        
-        const localUrl = URL.createObjectURL(source);
-        overlay.style.backgroundImage = `url(${localUrl})`;
-        document.documentElement.classList.add('has-wallpaper');
-        
-        try {
-            const cleanName = source.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-            const uniqueName = `.system/wallpaper_${Date.now()}_${cleanName}`;
-            
-            // Native XHR connection to wire up the system wide upload progress bar seamlessly
-            await new Promise((resolve, reject) => {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${uniqueName}`, true);
-                xhr.setRequestHeader('apikey', SUPABASE_ANON_KEY);
-                xhr.setRequestHeader('Authorization', `Bearer ${SUPABASE_ANON_KEY}`);
-                xhr.setRequestHeader('Content-Type', source.type || 'application/octet-stream');
-                
-                xhr.upload.onprogress = (e) => {
-                    if (e.lengthComputable) {
-                        const pct = Math.round((e.loaded / e.total) * 100);
-                        showProgress(pct);
-                        toast(`Uploading Background... ${pct}%`, 'info', 10000); // Forces progress into the middle of the screen
-                    }
-                };
-                
-                xhr.onload = () => {
-                    if (xhr.status >= 200 && xhr.status < 300) resolve();
-                    else reject(xhr.responseText);
-                };
-                xhr.onerror = () => reject('Network connection broken');
-                xhr.send(source);
-            });
-            
-            hideProgress();
-            
-                        const { data, error } = await supabaseClient.from('user_data').select('state').eq('id', USER_DOC_ID).single();
-                        if (error && error.code !== 'PGRST116') throw error;
-                        const latestState = (data && data.state) || {};
-                        const oldWpName = latestState.wallpaperName;
-            
-                        await supabaseClient.from('user_data').upsert({ id: USER_DOC_ID, state: { ...latestState, wallpaperName: uniqueName } });
-            
-                        if (oldWpName && oldWpName !== uniqueName) {
-                            try { await supabaseClient.storage.from(BUCKET_NAME).remove([oldWpName]); } catch(cleanupErr) { console.error("Old wallpaper cleanup error:", cleanupErr); }
-                        }
-            
-                        toast('Wallpaper live and synced!', 'ok');
-        } catch (e) {
-            hideProgress();
-            console.error("Wallpaper Upload Error:", e);
-            toast("Upload synchronization failed", "err");
-        }
-        return;
-    }
-    
-    // If it's a string URL (selected via built-in grid gallery click)
-        if (typeof source === 'string') {
-            overlay.style.setProperty('background-image', `url("${source}")`, 'important');
-            document.documentElement.classList.add('has-wallpaper');
-            localStorage.setItem('sovereign_wp_url', source);
-            modal.classList.remove('open'); // Close Modal Instantly
-            toast('Wallpaper applied!', 'ok');
-        
-            if (existingName) {
-                try {
-                    const { data, error } = await supabaseClient.from('user_data').select('state').eq('id', USER_DOC_ID).single();
-                    if (error && error.code !== 'PGRST116') throw error;
-                    const latestState = (data && data.state) || {};
-                    await supabaseClient.from('user_data').upsert({ id: USER_DOC_ID, state: { ...latestState, wallpaperName: existingName } });
-                } catch(e) { console.error("Wallpaper string sync error:", e); }
-            }
-        }
-};
-
-window.removeSavedWallpaper = function(event, idx) {
-    event.stopPropagation();
-    window.applyWallpaper(null);
-};
-
-window.syncCloudWallpaper = async function(overrideWpName = undefined) {
-    if (typeof supabaseClient === 'undefined' || typeof BUCKET_NAME === 'undefined') return;
-    try {
-        let wpName = overrideWpName;
-        if (wpName === undefined) {
-                        const { data, error } = await window.getCloudState();
-                        if (error && error.code !== 'PGRST116') throw error;
-                        wpName = data && data.state && data.state.wallpaperName;
-                    }
-
-        if (wpName) {
-                    const { data: urlData } = supabaseClient.storage.from(BUCKET_NAME).getPublicUrl(wpName);
-                    if (urlData && urlData.publicUrl) {
-                        document.getElementById('bgOverlay').style.setProperty('background-image', `url("${urlData.publicUrl}")`, 'important');
-                        document.documentElement.classList.add('has-wallpaper');
-                        localStorage.setItem('sovereign_wp_url', urlData.publicUrl);
-                    }
-                } else {
-                    document.getElementById('bgOverlay').style.setProperty('background-image', 'none', 'important');
-                    document.documentElement.classList.remove('has-wallpaper');
-                    localStorage.removeItem('sovereign_wp_url');
-                }
-    } catch(e) { console.error("Could not fetch cloud wallpaper:", e); }
-};
-
 
 const BUCKET_NAME = 'docs';
 const USER_DOC_ID = 'global_user_1';
@@ -1000,60 +633,9 @@ window.previewImage = function(event, url) {
     document.getElementById('mediaPreviewModal').style.display = 'flex';
 };
 
-window.toggleTheme = async function() {
-    if (window._themeToggling) return;
-    window._themeToggling = true;
-    document.documentElement.classList.toggle('light-theme');
-    const isLight = document.documentElement.classList.contains('light-theme');
-    const themeVal = isLight ? 'light' : 'dark';
-    try {
-        const { data, error: fetchErr } = await supabaseClient.from('user_data').select('state').eq('id', USER_DOC_ID).single();
-        if (fetchErr && fetchErr.code !== 'PGRST116') throw fetchErr;
-        const prevState = (data && data.state) || {};
-        const { error: upsertErr } = await supabaseClient.from('user_data').upsert({ id: USER_DOC_ID, state: { ...prevState, theme: themeVal } });
-        if (upsertErr) { console.error("Theme cloud save error:", upsertErr); toast('Failed to sync theme', 'err'); }
-    } catch(e) { console.error("Theme sync exception:", e); toast('Theme sync aborted due to state fetch failure', 'err'); }
-    finally { window._themeToggling = false; }
-};
-
 window.checkStorage = function() {
     const storageUsage = document.getElementById('sb-storage').textContent;
     toast(`Cloud Storage: ${storageUsage}`, 'info', 3000);
-};
-
-window.syncCloudTheme = async function() {
-    if (typeof supabaseClient === 'undefined') return;
-    try {
-        const { data, error } = await window.getCloudState();
-        if (error && error.code !== 'PGRST116') { console.error("Theme fetch error:", error); return; }
-        
-        const stateData = (data && data.state) || {};
-        if (stateData.theme) {
-            document.documentElement.classList.toggle('light-theme', stateData.theme === 'light');
-        }
-        
-        // Setup Full Realtime Sync across instances
-        window._lastWpName = stateData.wallpaperName;
-        
-        supabaseClient.channel('system-sync-channel')
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'user_data', filter: `id=eq.${USER_DOC_ID}` }, payload => {
-                const s = payload.new && payload.new.state;
-                if (s) {
-                    // Instant Theme Sync
-                    if (s.theme) {
-                        document.documentElement.classList.toggle('light-theme', s.theme === 'light');
-                    }
-                    
-                    // Instant Wallpaper Sync
-                    if (s.wallpaperName !== window._lastWpName) {
-                        window._lastWpName = s.wallpaperName;
-                        window.syncCloudWallpaper(s.wallpaperName || null);
-                    }
-                }
-            })
-            .subscribe();
-            
-    } catch(e) { console.error("Could not init cloud theme:", e); }
 };
 
 window.openCompiler = async function(url, event) {
@@ -1226,11 +808,6 @@ window.loadNotesData = async function() {
     else if (data && data.state) {
         S.notes = data.state.notes || [];
         S.folders = data.state.folders || [];
-        if (data.state.theme) {
-            const isLight = data.state.theme === 'light';
-            document.documentElement.classList.toggle('light-theme', isLight);
-            localStorage.setItem('sovereign_theme', data.state.theme);
-        }
     }
     window.renderNotes();
 };
@@ -2804,18 +2381,14 @@ window.cancelTapMove = function() {
 document.addEventListener('click', (e) => {
     const fMenu = document.getElementById('folderContextMenu');
     const fileMenu = document.getElementById('fileContextMenu');
-    const wpMenu = document.getElementById('wallpaperModal');
     if (fMenu && fMenu.classList.contains('open') && !fMenu.contains(e.target)) fMenu.classList.remove('open');
     if (fileMenu && fileMenu.classList.contains('open') && !fileMenu.contains(e.target)) fileMenu.classList.remove('open');
-    if (wpMenu && wpMenu.classList.contains('open') && !wpMenu.contains(e.target)) wpMenu.classList.remove('open');
 });
 document.addEventListener('touchstart', (e) => {
     const fMenu = document.getElementById('folderContextMenu');
     const fileMenu = document.getElementById('fileContextMenu');
-    const wpMenu = document.getElementById('wallpaperModal');
     if (fMenu && fMenu.classList.contains('open') && !fMenu.contains(e.target)) fMenu.classList.remove('open');
     if (fileMenu && fileMenu.classList.contains('open') && !fileMenu.contains(e.target)) fileMenu.classList.remove('open');
-    if (wpMenu && wpMenu.classList.contains('open') && !wpMenu.contains(e.target)) wpMenu.classList.remove('open');
 }, {passive: true});
 
 // Media Pan, Zoom & FS Engine
@@ -2920,7 +2493,7 @@ if(_imgSrc) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.loadFiles(); window.loadNotesData(); window.syncCloudTheme(); window.syncCloudWallpaper();
+  window.loadFiles(); window.loadNotesData();
   let roTimer;
   const resizeObserver = new ResizeObserver(() => {
       window.requestAnimationFrame(() => {
