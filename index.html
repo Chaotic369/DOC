@@ -336,19 +336,19 @@ html.light-theme .file-checkbox {
 
 /* Glassmorphism Wallpaper UI */
 html.has-wallpaper {
-  --bg-base: rgba(0, 0, 0, 0.15);
-  --bg-surface: rgba(0, 0, 0, 0.30);
+  --bg-base: transparent;
+  --bg-surface: transparent;
 }
 html.has-wallpaper #bgOverlay {
-  filter: brightness(0.45);
+  filter: none;
 }
 html.has-wallpaper.light-theme {
-  --bg-base: rgba(255, 255, 255, 0.5);
-  --bg-surface: #ffffff;
+  --bg-base: transparent;
+  --bg-surface: transparent;
 }
 html.has-wallpaper.light-theme #bgOverlay {
   display: block;
-  filter: brightness(1.8) contrast(0.6) grayscale(0.2);
+  filter: none;
 }
 html.has-wallpaper.light-theme body, 
 html.has-wallpaper.light-theme #mainWorkspace { 
@@ -365,7 +365,8 @@ html.has-wallpaper .category-card {
   content-visibility: auto;
   contain-intrinsic-size: auto 80px;
   border: none !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 html.is-scrolling.has-wallpaper .note-card,
 html.is-scrolling.has-wallpaper .file-card,
@@ -387,30 +388,37 @@ html.has-wallpaper #mediaControlsBar,
 html.has-wallpaper #fullNoteModal > div,
 html.has-wallpaper #toast {
   transform: translateZ(0);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: transparent !important;
 }
 html.has-wallpaper #storage-toolbar {
   transform: translateZ(0);
   border: none !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 html.has-wallpaper .quick-input-bar {
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   transform: translateZ(0);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 /* Fixed UI: High quality blur, hardware accelerated */
 
 html.has-wallpaper #uploadSquircleBtn {
   transform: translateZ(0);
-  background: rgba(25, 24, 19, 0.85) !important;
+  background: transparent !important;
   color: #f8f7f3 !important;
   border: none !important;
 }
 html.has-wallpaper.light-theme #uploadSquircleBtn {
-  background: rgba(229, 224, 218, 0.85) !important;
+  background: transparent !important;
   color: #181817 !important;
 }
 </style>
